@@ -44,3 +44,51 @@
 // =============================================================================
 
 
+
+
+const readlineSync = require("readline-sync");
+
+/**
+ * Calculates the sum of all numbers in the array.
+ * @param {number[]} arr
+ * @returns {number}
+ */
+function calculateSum(arr) {
+  let sum = 0;
+  for (let i = 0; i < arr.length; i++) {
+    sum += arr[i];
+  }
+  return sum;
+}
+
+/**
+ * Calculates the average of all numbers in the array.
+ * @param {number[]} arr
+ * @returns {number}
+ */
+function calculateAverage(arr) {
+  const sum = calculateSum(arr);
+  return sum / arr.length;
+}
+
+/**
+ * Finds the maximum value in the array.
+ * @param {number[]} arr
+ * @returns {number}
+ */
+function findMax(arr) {
+  let max = arr[0];
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i] > max) {
+      max = arr[i];
+    }
+  }
+  return max;
+}
+
+/**
+ * Finds the minimum value in the array.
+ * @param {number[]} arr
+ * @returns {number}
+ */
+function findMin(arr){}

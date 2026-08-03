@@ -55,3 +55,82 @@
 // =============================================================================
 
 
+
+const readlineSync = require('readline-sync');
+
+/**
+ * PART A — Generates the first N terms of the Fibonacci sequence.
+ * @param {number} n - Number of terms to generate.
+ * @returns {number[]} Array containing the first N Fibonacci numbers.
+ */
+function generateFibonacci(n) {
+  const sequence = [];
+
+  if (n >= 1) {
+    sequence.push(0);
+  }
+  if (n >= 2) {
+    sequence.push(1);
+  }
+
+  for (let i = 2; i < n; i++) {
+    const nextValue = sequence[i - 1] + sequence[i - 2];
+    sequence.push(nextValue);
+  }
+
+  return sequence;
+}
+
+/**
+ * PART B — Checks whether a given number belongs to the Fibonacci sequence.
+ * @param {number} num - The number to check.
+ * @returns {boolean} true if num is a Fibonacci number, false otherwise.
+ */
+function isFibonacci(num) {
+  // Negative numbers are never Fibonacci numbers
+  if (num < 0) {
+    return false;
+  }
+
+  let a = 0;
+  let b = 1;
+
+  // Generate terms up to (and including) num, using a loop (no recursion)
+  while (a < num) {
+    const next = a + b;
+    a = b;
+    b = next;
+  }
+
+  // After the loop, `a` is the first generated term >= num
+  return a === num;
+}
+
+function main() {
+  // ---------------------------------------------------------------------
+  // PART A — Print the first N terms
+  // ---------------------------------------------------------------------
+  console.log('=== PART A: First N Fibonacci Terms ===');
+  const n = readlineSync.questionInt('How many terms? ');
+
+  if (n <= 0) {
+    console.log('Error: N must be a positive integer.');
+  } else {
+    const sequence = generateFibonacci(n);
+    console.log(`Fibonacci sequence: ${sequence.join(' ')}`);
+  }
+
+  // ---------------------------------------------------------------------
+  // PART B — Check if a number belongs to the sequence
+  // ---------------------------------------------------------------------
+  console.log('\n=== PART B: Check a Fibonacci Number ===');
+  const num = readlineSync.questionInt('Enter a number to check: ');
+
+  if (isFibonacci(num)) {
+    console.log(`${num} is a Fibonacci number.`);
+  } else {
+    console.log(`${num} is NOT a Fibonacci number.`);
+  }
+}
+
+main();

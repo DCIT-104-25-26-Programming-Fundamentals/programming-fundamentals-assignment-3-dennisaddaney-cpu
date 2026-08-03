@@ -60,3 +60,53 @@
 // =============================================================================
 
 
+
+const readlineSync = require('readline-sync');
+
+/**
+ * PART A — Prints the multiplication table for a single number (1 to 12).
+ * @param {number} num - The number to generate the table for.
+ */
+function printTable(num) {
+  console.log(`Multiplication Table for ${num}:`);
+  for (let i = 1; i <= 12; i++) {
+    const product = num * i;
+    console.log(`${num} x ${String(i).padEnd(2)} = ${product}`);
+  }
+}
+
+/**
+ * PART B — Prints multiplication tables for every number from 1 to N,
+ * separated by a line of dashes.
+ * @param {number} n - The upper bound of numbers to generate tables for.
+ */
+function printTablesUpToN(n) {
+  for (let num = 1; num <= n; num++) {
+    printTable(num);
+    console.log('---------------------------');
+  }
+}
+
+function main() {
+  // ---------------------------------------------------------------------
+  // PART A — Single Table
+  // ---------------------------------------------------------------------
+  console.log('=== PART A: Single Multiplication Table ===');
+  const number = readlineSync.questionInt('Enter a number: ');
+  printTable(number);
+
+  // ---------------------------------------------------------------------
+  // PART B — Bonus: Tables from 1 to N
+  // ---------------------------------------------------------------------
+  console.log('\n=== PART B: Tables from 1 to N ===');
+  const n = readlineSync.questionInt('Enter N: ');
+
+  if (n <= 0 || !Number.isInteger(n)) {
+    console.log('Error: N must be a positive integer.');
+    return;
+  }
+
+  printTablesUpToN(n);
+}
+
+main();
